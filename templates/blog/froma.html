@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="alert alert-success" role="alert" style="width: 400px;  margin-left: 850px ">
+        <h3>Thanks for your massage!</h3>
+    </div>
+    <div style="width: 400px;  margin-left: 850px ">
+        <a href="{% url 'index' %}"><h5>Back Home</h5></a>
+    </div>
+{% endblock %}
