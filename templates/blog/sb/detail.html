@@ -81,9 +81,14 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3 update-cart" data-product="{{ detail.id }}" data-action="add"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                        {#                        <button class="btn btn-primary px-3 update-cart" data-product="{{ detail.id }}" data-action="add"><i class="fa fa-shopping-cart mr-1"></i> Add To#}
+                        {#                            Cart#}
+                        {#                        </button>#}
+                        <a href="{{ detail.get_add_to_cart_url }}" class="btn btn-primary px-3 update-cart"><i
+                                class="fa fa-shopping-cart mr-1"></i> Add To
                             Cart
-                        </button>
+                        </a>
+
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>

@@ -36,33 +36,44 @@
                     </tr>
                     </thead>
                     <tbody class="align-middle">
-                    {% for it in items %}
-                    <tr>
-                        <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> {{ it.product.name }}
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
+                    {% for order_item in order.items.all %}
+                        <tr>
+                            <td class="align-middle"><img src="img/product-1.jpg" alt=""
+                                                          style="width: 50px;"> {{ order_item.item.name }}
+                            </td>
+                            <td class="align-middle">${{ order_item.item.price }}</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <a href="{% url 'remove_single' order_item.item.slug %}">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                    <input type="text"
+                                           class="form-control form-control-sm bg-secondary border-0 text-center"
+                                           value="{{ order_item.quantity }}">
+                                    <a href="{% url 'add-to-cart' order_item.item.slug %}">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </a>
                                 </div>
-                                <input type="text"
-                                       class="form-control form-control-sm bg-secondary border-0 text-center"
-                                       value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
+
+                            </td>
+                            <td class="align-middle">${{ order_item.get_total_item_price }}</td>
+                            <td class="align-middle">
+                                <a href="{% url 'remove-from-cart' order_item.item.slug %}">
+                                    <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i>
                                     </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
-                        </td>
-                    </tr>
+                                </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <h1>Your card empty</h1>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -92,7 +103,7 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>$160</h5>
+                            <h5>${{ order.get_total }}</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout
                         </button>
